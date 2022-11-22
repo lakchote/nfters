@@ -8,8 +8,8 @@ export default function Home() {
         <meta name="description" content="Test assignment #1 for Ternoa" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-
-      <main>Welcome</main>
+      <main></main>
+      <footer></footer>
     </div>
   )
 }
