@@ -3,6 +3,7 @@ export enum DISCOVER_NFT_SOURCES {
   "SMART_CONTRACT" = "smart_contract",
 }
 
-export type DiscoverNFTSource = {
+export type DiscoverNFTProps = {
   source: DISCOVER_NFT_SOURCES
+  showBidding: boolean
 }

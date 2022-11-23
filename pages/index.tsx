@@ -20,10 +20,10 @@ export default function Home() {
         <AmazeNFT />
         <FeaturedCollection />
         <CreateSellNFT />
-        <DiscoverMoreNFT source={DISCOVER_NFT_SOURCES.DB} />
+        <DiscoverMoreNFT source={DISCOVER_NFT_SOURCES.DB} showBidding={true} />
         <div className="pt-[46px] bg-gray"></div>
         <div className="divider-nft-categories"></div>
-        <DiscoverMoreNFT source={DISCOVER_NFT_SOURCES.SMART_CONTRACT} />
+        <DiscoverMoreNFT source={DISCOVER_NFT_SOURCES.SMART_CONTRACT} showBidding={false} />
       </main>
       <footer>
         <Footer />
