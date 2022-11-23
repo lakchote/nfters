@@ -18,7 +18,7 @@ export default function Footer() {
         </div>
         <div className="flex-col justify-center">
           <h3 className="text-lg normal-case font-dmSansBold tracking-wide pt-7 lg:pt-0">Market Place</h3>
-          <div className="space-y-2 lg:space-y-3 lg:mt-6 text-sm font-dmSansRegular text-black-light">
+          <div className="space-y-2 lg:space-y-3 mt-2 lg:mt-6 text-sm font-dmSansRegular text-black-light">
             <div>All NFTs</div>
             <div>New</div>
             <div>Art</div>
@@ -29,7 +29,7 @@ export default function Footer() {
         </div>
         <div className="flex-row justify-center">
           <h3 className="text-lg normal-case font-dmSansBold tracking-wide pt-7 lg:pt-0">My Account</h3>
-          <div className="space-y-2 lg:space-y-3 lg:mt-6 text-sm font-dmSansRegular text-black-light">
+          <div className="space-y-2 lg:space-y-3 mt-2 lg:mt-6 text-sm font-dmSansRegular text-black-light">
             <div>Profile</div>
             <div>Favorite</div>
             <div>My Collections</div>
