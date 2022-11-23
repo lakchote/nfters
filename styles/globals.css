@@ -60,3 +60,39 @@ input[type="search"]::-webkit-search-results-decoration {
 .bg-gray {
   background: rgba(217, 224, 236, 0.2);
 }
+
+.create-sell-nft-img-one {
+  width: 150px;
+  height: 150px;
+}
+.create-sell-nft-img-two {
+  width: 97px;
+  height: 107px;
+}
+.create-sell-nft-img-three {
+  width: 120px;
+  height: 132px;
+}
+.avatar {
+  height: 40px;
+  width: 40px;
+}
+
+@media (min-width: 640px) {
+  .create-sell-nft-img-one {
+    width: 300px;
+    height: 300px;
+  }
+  .create-sell-nft-img-two {
+    width: 194px;
+    height: 214px;
+  }
+  .create-sell-nft-img-three {
+    width: 241px;
+    height: 265px;
+  }
+  .avatar {
+    height: 80px;
+    width: 80px;
+  }
+}
