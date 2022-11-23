@@ -1,4 +1,5 @@
 import Head from "next/head"
+import Hero from "../components/Hero"
 
 export default function Home() {
   return (
@@ -8,7 +9,9 @@ export default function Home() {
         <meta name="description" content="Test assignment #1 for Ternoa" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main></main>
+      <main>
+        <Hero />
+      </main>
       <footer></footer>
     </div>
   )

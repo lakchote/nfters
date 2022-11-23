@@ -22,6 +22,16 @@
   src: url("./fonts/DMSans-Medium.woff");
 }
 
+@font-face {
+  font-family: "DMSansRegular";
+  src: url("./fonts/DMSans-Regular.woff");
+}
+
+@font-face {
+  font-family: "AvertaRegular";
+  src: url("./fonts/Averta-Regular.woff");
+}
+
 input[type="search"]::-webkit-search-decoration,
 input[type="search"]::-webkit-search-cancel-button,
 input[type="search"]::-webkit-search-results-button,
@@ -39,5 +49,15 @@ input[type="search"]::-webkit-search-results-decoration {
 }
 
 .border-gray-header {
-    border-color: #EFEFEF;
+  border-color: #efefef;
+}
+
+.bg-bid {
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(25px);
+}
+
+.bg-gray-home {
+  background: rgba(217, 224, 236, 0.2);
+  backdrop-filter: blur(25px);
 }

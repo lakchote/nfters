@@ -6,6 +6,8 @@ module.exports = {
       integralCFRegular: ["IntegralCFRegular"],
       dmSansBold: ["DMSansBold"],
       dmSansMedium: ["DMSansMedium"],
+      dmSansRegular: ["DMSansRegular"],
+      avertaRegular: ["AvertaRegular"],
     },
   },
   plugins: [require("daisyui")],
