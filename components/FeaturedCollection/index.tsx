@@ -16,7 +16,7 @@ export default function FeaturedCollection() {
               height={272}
               className="float-left mr-[10px]"
             />
-            <div className="lg:space-y-2">
+            <div className="space-y-2 mr-1 lg:mr-0">
               <Image src="/nft_collections/featured/1_y_0.png" alt="" width={103} height={85} />
               <Image src="/nft_collections/featured/1_y_1.png" alt="" width={103} height={85} />
               <Image src="/nft_collections/featured/1_y_2.png" alt="" width={103} height={85} />
@@ -46,7 +46,7 @@ export default function FeaturedCollection() {
               height={272}
               className="float-left mr-[10px]"
             />
-            <div className="space-y-2">
+            <div className="space-y-2 mr-1 lg:mr-0">
               <Image src="/nft_collections/featured/1_y_0.png" alt="" width={103} height={85} />
               <Image src="/nft_collections/featured/1_y_1.png" alt="" width={103} height={85} />
               <Image src="/nft_collections/featured/1_y_2.png" alt="" width={103} height={85} />
@@ -76,7 +76,7 @@ export default function FeaturedCollection() {
               height={272}
               className="float-left mr-[10px]"
             />
-            <div className="space-y-2">
+            <div className="space-y-2 mr-1 lg:mr-0">
               <Image src="/nft_collections/featured/1_y_0.png" alt="" width={103} height={85} />
               <Image src="/nft_collections/featured/1_y_1.png" alt="" width={103} height={85} />
               <Image src="/nft_collections/featured/1_y_2.png" alt="" width={103} height={85} />

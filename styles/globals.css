@@ -52,6 +52,15 @@ input[type="search"]::-webkit-search-results-decoration {
   border-color: #efefef;
 }
 
+.price-eth {
+  color: #00ac4f;
+}
+
+.divider-nft-categories {
+  margin-top: 4px;
+  background: rgba(217, 224, 236, 0.2);
+}
+
 .bg-bid {
   background: rgba(255, 255, 255, 0.2);
   backdrop-filter: blur(25px);
@@ -59,6 +68,10 @@ input[type="search"]::-webkit-search-results-decoration {
 
 .bg-gray {
   background: rgba(217, 224, 236, 0.2);
+}
+
+.bg-discover-category {
+  background: rgba(220, 220, 220, 0.2);
 }
 
 .create-sell-nft-img-one {
