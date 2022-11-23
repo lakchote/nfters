@@ -66,6 +66,10 @@ input[type="search"]::-webkit-search-results-decoration {
   backdrop-filter: blur(25px);
 }
 
+.text-black-light {
+  color:#363639;
+}
+
 .bg-gray {
   background: rgba(217, 224, 236, 0.2);
 }
