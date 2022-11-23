@@ -22,7 +22,7 @@ export default function AmazeNFT() {
           <Image src="/chart.png" alt="" width={36} height={36} className="ml-4 lg:ml-0 mr-4 float-left" />
           <div className="flex-col items-center mt-10 lg:mt-0 ">
             <h3 className="text-lg font-semibold text-secondary tracking-wider">Growth Transaction</h3>
-            <div className="ml-[70px] lg:ml-[53px] w-[311px] font-dmSansRegular text-sm leading-6 text-[#696969]">
+            <div className="ml-[70px] lg:ml-[53px] lg:w-[311px] font-dmSansRegular text-sm leading-6 text-[#696969]">
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam etiam viverra tellus
             </div>
           </div>

@@ -16,7 +16,7 @@ export default function CreateSellNFT() {
             <Image src="/avatars/avatar_0.png" alt="" width={80} height={80} className="avatar" />
           </div>
         </div>
-        <div className="relative top-7 left-[50px] lg:top-14 lg:left-[110px]">
+        <div className="relative top-7 left-[15px] lg:top-14 lg:left-[110px]">
           <Image
             src="/stacked_img_3.png"
             alt=""
