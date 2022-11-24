@@ -3,6 +3,6 @@ export enum SUPPORTED_DEVICE_TYPES {
   "MOBILE" = "mobile",
 }
 
-export type CustomConnectButtonProps = {
+export type DeviceProps = {
   device: SUPPORTED_DEVICE_TYPES
 }

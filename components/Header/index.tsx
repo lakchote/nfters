@@ -1,7 +1,7 @@
-import Image from "next/image"
 import Link from "next/link"
 import CustomConnectButton from "../CustomConnectButton"
-import { SUPPORTED_DEVICE_TYPES } from "../CustomConnectButton/types"
+import { SUPPORTED_DEVICE_TYPES } from "../../common/types/devices"
+import PolkadotConnectButton from "../PolkadotConnectButton"
 
 export default function Header() {
   return (
@@ -67,12 +67,13 @@ export default function Header() {
         >
           NFTERs
         </Link>
-        <div className="lg:hidden flex justify-end min-w-full space-x-4">
+        <div className="lg:hidden flex justify-end min-w-full space-x-4 relative">
           <CustomConnectButton device={SUPPORTED_DEVICE_TYPES.MOBILE} />
-          <button className="flex items-center font-dmSansBold text-sm">
-            <Image src="/polkadot.svg" alt="Connect With Polkadot" width={18} height={18} />
-          </button>
+          <div className="flex items-center font-dmSansBold text-sm">
+            <PolkadotConnectButton device={SUPPORTED_DEVICE_TYPES.MOBILE} />
+          </div>
         </div>
+
         <span className="hidden lg:inline-flex vertical-spacer"></span>
         <ul className="hidden lg:menu lg:menu-horizontal space-x-3 tracking-wider font-dmSansMedium text-secondary">
           <li>
@@ -111,9 +112,7 @@ export default function Header() {
           Upload
         </button>
         <CustomConnectButton device={SUPPORTED_DEVICE_TYPES.DESKTOP} />
-        <button>
-          <Image src="/polkadot.svg" alt="Connect With Polkadot" width={25} height={25} />
-        </button>
+        <PolkadotConnectButton device={SUPPORTED_DEVICE_TYPES.DESKTOP} />
       </div>
     </div>
   )
