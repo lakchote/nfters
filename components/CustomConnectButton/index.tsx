@@ -1,14 +1,59 @@
 import { ConnectButton } from "@rainbow-me/rainbowkit"
-import { useConnect, useDisconnect, useSwitchNetwork } from "wagmi"
+import { useAccount, useConnect, useDisconnect, useSwitchNetwork, useSignMessage } from "wagmi"
 import { MetaMaskConnector } from "@wagmi/core/connectors/metaMask"
 import { CustomConnectButtonProps, SUPPORTED_DEVICE_TYPES } from "./types"
 import Image from "next/image"
+import { getCsrfToken, signIn, useSession } from "next-auth/react"
+import { SiweMessage } from "siwe"
+import { useEffect, useState } from "react"
 
 export default function CustomConnectButton({ device }: CustomConnectButtonProps) {
   const { switchNetwork } = useSwitchNetwork()
   const { disconnect } = useDisconnect()
   const { connect } = useConnect()
+  const { signMessageAsync } = useSignMessage()
+  const { address, isConnected } = useAccount()
+  const { data: session } = useSession()
+  const [isSigninTriggered, setIsSigninTriggered] = useState<boolean>(false)
   const fallbackChainId = "5"
+
+  const handleLogin = async () => {
+    try {
+      const callbackUrl = "/protected"
+      const message = new SiweMessage({
+        domain: window.location.host,
+        address: address,
+        statement: "Sign in to my NFTers app made with love for Ternoa.",
+        uri: window.location.origin,
+        version: "1",
+        chainId: process.env.NEXT_PUBLIC_CHAIN_ID
+          ? parseInt(process.env.NEXT_PUBLIC_CHAIN_ID)
+          : parseInt(fallbackChainId),
+        nonce: await getCsrfToken(),
+      })
+
+      const signature = await signMessageAsync({
+        message: message.prepareMessage(),
+      })
+
+      await signIn("credentials", {
+        message: JSON.stringify(message),
+        redirect: false,
+        signature,
+        callbackUrl,
+      })
+    } catch (error) {
+      console.error(error)
+    }
+  }
+
+  useEffect(() => {
+    if (isConnected && !session && !isSigninTriggered) {
+      handleLogin()
+      setIsSigninTriggered(true)
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isConnected])
 
   return (
     <ConnectButton.Custom>
@@ -35,7 +80,9 @@ export default function CustomConnectButton({ device }: CustomConnectButtonProps
                     className={`${
                       device === SUPPORTED_DEVICE_TYPES.DESKTOP ? "wallet-connect-btn" : "xs-wallet-connect-btn"
                     }`}
-                    onClick={async () => await connect({ connector: new MetaMaskConnector() })}
+                    onClick={async () => {
+                      !isConnected ? await connect({ connector: new MetaMaskConnector() }) : await handleLogin()
+                    }}
                   >
                     {device === SUPPORTED_DEVICE_TYPES.DESKTOP ? (
                       "Connect Wallet"
@@ -46,7 +93,7 @@ export default function CustomConnectButton({ device }: CustomConnectButtonProps
                 )
               }
 
-              if (chain?.unsupported) {
+              if (chain.unsupported) {
                 return (
                   <button
                     onClick={() => switchNetwork?.(parseInt(process.env.NEXT_PUBLIC_CHAIN_ID ?? fallbackChainId))}
@@ -69,7 +116,10 @@ export default function CustomConnectButton({ device }: CustomConnectButtonProps
                       ? "wallet-connect-btn"
                       : "xs-wallet-connect-btn ml-[-50px]"
                   }`}
-                  onClick={async () => await disconnect()}
+                  onClick={async () => {
+                    await disconnect()
+                    setIsSigninTriggered(false)
+                  }}
                 >
                   {account?.displayBalance}
                 </button>
