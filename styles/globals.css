@@ -67,7 +67,7 @@ input[type="search"]::-webkit-search-results-decoration {
 }
 
 .text-black-light {
-  color:#363639;
+  color: #363639;
 }
 
 .bg-gray {
@@ -93,6 +93,29 @@ input[type="search"]::-webkit-search-results-decoration {
 .avatar {
   height: 40px;
   width: 40px;
+}
+
+.wallet-connect-btn {
+  @apply btn;
+  @apply bg-transparent;
+  @apply hover:bg-transparent;
+  @apply text-primary;
+  @apply border-primary;
+  @apply border-2;
+  @apply rounded-[66px];
+  @apply mx-5;
+  @apply px-[22px];
+  @apply normal-case;
+  @apply text-[14px];
+  @apply font-dmSansBold;
+  @apply tracking-wider;
+}
+
+.xs-wallet-connect-btn {
+  @apply flex;
+  @apply items-center;
+  @apply font-dmSansBold;
+  @apply text-sm;
 }
 
 @media (min-width: 640px) {

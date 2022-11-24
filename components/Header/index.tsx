@@ -1,5 +1,7 @@
 import Image from "next/image"
 import Link from "next/link"
+import CustomConnectButton from "../CustomConnectButton"
+import { SUPPORTED_DEVICE_TYPES } from "../CustomConnectButton/types"
 
 export default function Header() {
   return (
@@ -66,9 +68,7 @@ export default function Header() {
           NFTERs
         </Link>
         <div className="lg:hidden flex justify-end min-w-full space-x-4">
-          <button className="flex items-center font-dmSansBold text-sm">
-            <Image src="/metamask.svg" alt="Connect With Metamask" width={24} height={24} />
-          </button>
+          <CustomConnectButton device={SUPPORTED_DEVICE_TYPES.MOBILE} />
           <button className="flex items-center font-dmSansBold text-sm">
             <Image src="/polkadot.svg" alt="Connect With Polkadot" width={18} height={18} />
           </button>
@@ -110,9 +110,7 @@ export default function Header() {
         <button className="btn btn-primary text-white rounded-[66px] ml-20 px-10 normal-case text-[14px] font-dmSansBold tracking-wider">
           Upload
         </button>
-        <button className="btn bg-transparent hover:bg-transparent text-primary border-primary border-2 rounded-[66px] mx-5 px-[22px] normal-case text-[14px] font-dmSansBold tracking-wider">
-          Connect Wallet
-        </button>
+        <CustomConnectButton device={SUPPORTED_DEVICE_TYPES.DESKTOP} />
         <button>
           <Image src="/polkadot.svg" alt="Connect With Polkadot" width={25} height={25} />
         </button>
