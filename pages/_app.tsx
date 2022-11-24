@@ -8,6 +8,8 @@ import { metaMaskWallet } from "@rainbow-me/rainbowkit/wallets"
 import { WagmiConfig, createClient } from "wagmi"
 import Header from "../components/Header"
 import { RainbowKitProvider, connectorsForWallets } from "@rainbow-me/rainbowkit"
+import { RainbowKitSiweNextAuthProvider } from "@rainbow-me/rainbowkit-siwe-next-auth"
+import { SessionProvider } from "next-auth/react"
 
 const { chains, provider } = configureChains(
   [chain.goerli],
@@ -31,9 +33,13 @@ export default function App({ Component, pageProps }: AppProps) {
   return (
     <>
       <WagmiConfig client={wagmiClient}>
-        <RainbowKitProvider chains={chains}>
-          <Header />
-        </RainbowKitProvider>
+        <SessionProvider refetchInterval={0} session={pageProps.session}>
+          <RainbowKitSiweNextAuthProvider>
+            <RainbowKitProvider chains={chains}>
+              <Header />
+            </RainbowKitProvider>
+          </RainbowKitSiweNextAuthProvider>
+        </SessionProvider>
       </WagmiConfig>
       <Component {...pageProps} />
     </>
