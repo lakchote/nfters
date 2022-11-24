@@ -1,20 +1,20 @@
 import { ConnectButton } from "@rainbow-me/rainbowkit"
 import { useAccount, useConnect, useDisconnect, useSwitchNetwork, useSignMessage } from "wagmi"
 import { MetaMaskConnector } from "@wagmi/core/connectors/metaMask"
-import { CustomConnectButtonProps, SUPPORTED_DEVICE_TYPES } from "./types"
 import Image from "next/image"
 import { getCsrfToken, signIn, useSession } from "next-auth/react"
 import { SiweMessage } from "siwe"
 import { useEffect, useState } from "react"
+import { DeviceProps, SUPPORTED_DEVICE_TYPES } from "../../common/types/devices"
 
-export default function CustomConnectButton({ device }: CustomConnectButtonProps) {
+export default function CustomConnectButton({ device }: DeviceProps) {
   const { switchNetwork } = useSwitchNetwork()
   const { disconnect } = useDisconnect()
   const { connect } = useConnect()
   const { signMessageAsync } = useSignMessage()
   const { address, isConnected } = useAccount()
   const { data: session } = useSession()
-  const [isSigninTriggered, setIsSigninTriggered] = useState<boolean>(false)
+  const [isSigninNeeded, setIsSigninNeeded] = useState<boolean>(false)
   const fallbackChainId = "5"
 
   const handleLogin = async () => {
@@ -48,9 +48,9 @@ export default function CustomConnectButton({ device }: CustomConnectButtonProps
   }
 
   useEffect(() => {
-    if (isConnected && !session && !isSigninTriggered) {
+    if (isConnected && !session && isSigninNeeded) {
       handleLogin()
-      setIsSigninTriggered(true)
+      setIsSigninNeeded(false)
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isConnected])
@@ -99,9 +99,7 @@ export default function CustomConnectButton({ device }: CustomConnectButtonProps
                     onClick={() => switchNetwork?.(parseInt(process.env.NEXT_PUBLIC_CHAIN_ID ?? fallbackChainId))}
                     type="button"
                     className={`${
-                      device === SUPPORTED_DEVICE_TYPES.DESKTOP
-                        ? "wallet-connect-btn"
-                        : "xs-wallet-connect-btn ml-[-85px]"
+                      device === SUPPORTED_DEVICE_TYPES.DESKTOP ? "wallet-connect-btn" : "xs-wallet-connect-btn"
                     }`}
                   >
                     Switch Network
@@ -114,11 +112,11 @@ export default function CustomConnectButton({ device }: CustomConnectButtonProps
                   className={`${
                     device === SUPPORTED_DEVICE_TYPES.DESKTOP
                       ? "wallet-connect-btn"
-                      : "xs-wallet-connect-btn ml-[-50px]"
+                      : "xs-wallet-connect-btn ml-[-50px] items-center mt-0.5"
                   }`}
                   onClick={async () => {
                     await disconnect()
-                    setIsSigninTriggered(false)
+                    setIsSigninNeeded(true)
                   }}
                 >
                   {account?.displayBalance}

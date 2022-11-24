@@ -9,6 +9,8 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@polkadot/api": "^9.9.1",
+    "@polkadot/extension-dapp": "^0.44.6",
     "@rainbow-me/rainbowkit": "^0.8.0",
     "@rainbow-me/rainbowkit-siwe-next-auth": "^0.1.5",
     "@types/node": "18.11.9",
