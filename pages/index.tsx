@@ -1,11 +1,11 @@
 import Head from "next/head"
 import AmazeNFT from "../components/AmazeNFT"
 import CreateSellNFT from "../components/CreateSellNFT"
-import DiscoverMoreNFT from "../components/DiscoverMoreNFT"
+import DiscoverDBMoreNFT from "../components/DiscoverDBMoreNFT"
 import FeaturedCollection from "../components/FeaturedCollection"
 import Hero from "../components/Hero"
-import { DISCOVER_NFT_SOURCES } from "../components/DiscoverMoreNFT/types"
 import Footer from "../components/Footer"
+import DiscoverEVMMoreNFT from "../components/DiscoverEVMMoreNFT"
 
 export default function Home() {
   return (
@@ -20,10 +20,10 @@ export default function Home() {
         <AmazeNFT />
         <FeaturedCollection />
         <CreateSellNFT />
-        <DiscoverMoreNFT source={DISCOVER_NFT_SOURCES.DB} showBidding={true} />
+        <DiscoverDBMoreNFT />
         <div className="pt-[46px] bg-gray"></div>
         <div className="divider-nft-categories"></div>
-        <DiscoverMoreNFT source={DISCOVER_NFT_SOURCES.SMART_CONTRACT} showBidding={false} />
+        <DiscoverEVMMoreNFT />
       </main>
       <footer>
         <Footer />

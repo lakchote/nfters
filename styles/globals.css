@@ -118,6 +118,10 @@ input[type="search"]::-webkit-search-results-decoration {
   @apply text-sm;
 }
 
+.btn-filter-category {
+  @apply btn btn-sm hover:text-white normal-case text-secondary rounded-full border-none bg-discover-category;
+}
+
 @media (min-width: 640px) {
   .create-sell-nft-img-one {
     width: 300px;
