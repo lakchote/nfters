@@ -10,6 +10,8 @@ import Header from "../components/Header"
 import { RainbowKitProvider, connectorsForWallets } from "@rainbow-me/rainbowkit"
 import { RainbowKitSiweNextAuthProvider } from "@rainbow-me/rainbowkit-siwe-next-auth"
 import { SessionProvider } from "next-auth/react"
+import { QueryClient, QueryClientProvider } from "react-query"
+import { useState } from "react"
 
 const { chains, provider } = configureChains(
   [chain.goerli],
@@ -30,6 +32,8 @@ const wagmiClient = createClient({
 })
 
 export default function App({ Component, pageProps }: AppProps) {
+  const [queryClient] = useState<QueryClient>(new QueryClient())
+
   return (
     <>
       <WagmiConfig client={wagmiClient}>
@@ -39,9 +43,11 @@ export default function App({ Component, pageProps }: AppProps) {
               <Header />
             </RainbowKitProvider>
           </RainbowKitSiweNextAuthProvider>
+          <QueryClientProvider client={queryClient}>
+            <Component {...pageProps} />
+          </QueryClientProvider>
         </SessionProvider>
       </WagmiConfig>
-      <Component {...pageProps} />
     </>
   )
 }

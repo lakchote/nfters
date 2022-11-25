@@ -100,7 +100,7 @@ export default function UploadImage({ device }: DeviceProps) {
                 onChange={(e) => {
                   setEndingDate(e.target.value)
                 }}
-                type="date"
+                type="datetime-local"
               />
               <label htmlFor="nfters-create-category" className="label max-w-lg font-semibold">
                 <span className="label-text text-neutral">Category</span>
