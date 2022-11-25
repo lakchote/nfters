@@ -2,8 +2,11 @@ import Link from "next/link"
 import CustomConnectButton from "../CustomConnectButton"
 import { SUPPORTED_DEVICE_TYPES } from "../../common/types/devices"
 import PolkadotConnectButton from "../PolkadotConnectButton"
+import UploadImage from "../UploadImage"
+import { useState } from "react"
 
 export default function Header() {
+  const [hideMetamask, setHideMetamask] = useState<boolean>(false)
   return (
     <div className="navbar lg:justify-around bg-base-100 pt-[31px] pb-[25px] border-b-[1px] border-gray-header">
       <div className="dropdown">
@@ -51,13 +54,6 @@ export default function Header() {
               </svg>
             </button>
           </div>
-          <div className="border-t-2 pt-6 pb-2 border-gray-header">
-            <div className="flex justify-center">
-              <button className="btn btn-sm btn-primary text-white normal-case text-sm font-dmSansBold tracking-wider">
-                Upload
-              </button>
-            </div>
-          </div>
         </ul>
       </div>
       <div>
@@ -67,9 +63,10 @@ export default function Header() {
         >
           NFTERs
         </Link>
-        <div className="lg:hidden flex justify-end min-w-full space-x-4 relative">
-          <CustomConnectButton device={SUPPORTED_DEVICE_TYPES.MOBILE} />
-          <div className="flex items-center font-dmSansBold text-sm">
+        <div className="lg:hidden flex justify-end min-w-full space-x-4 relative items-center">
+          <UploadImage device={SUPPORTED_DEVICE_TYPES.MOBILE} />
+          {!hideMetamask && <CustomConnectButton device={SUPPORTED_DEVICE_TYPES.MOBILE} />}
+          <div onClick={() => setHideMetamask(!hideMetamask)} className="relative">
             <PolkadotConnectButton device={SUPPORTED_DEVICE_TYPES.MOBILE} />
           </div>
         </div>
@@ -108,9 +105,7 @@ export default function Header() {
             </svg>
           </button>
         </div>
-        <button className="btn btn-primary text-white rounded-[66px] ml-20 px-10 normal-case text-[14px] font-dmSansBold tracking-wider">
-          Upload
-        </button>
+        <UploadImage device={SUPPORTED_DEVICE_TYPES.DESKTOP} />
         <CustomConnectButton device={SUPPORTED_DEVICE_TYPES.DESKTOP} />
         <PolkadotConnectButton device={SUPPORTED_DEVICE_TYPES.DESKTOP} />
       </div>
