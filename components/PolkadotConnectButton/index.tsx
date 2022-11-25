@@ -58,11 +58,11 @@ export default function PolkadotConnectButton({ device }: DeviceProps) {
             alt="Connect With Polkadot"
             width={25}
             height={25}
-            className={`${device === SUPPORTED_DEVICE_TYPES.MOBILE ? "w-[18px] h-[18px] mt-0.5" : ""}`}
+            className={`${device === SUPPORTED_DEVICE_TYPES.MOBILE ? "w-[18px] h-[18px] mt-1" : ""}`}
           />
         </button>
       ) : (
-        <div className={`${device === SUPPORTED_DEVICE_TYPES.MOBILE ? "text-xs mr-8 w-0" : "text-sm"}`}>
+        <div className={`${device === SUPPORTED_DEVICE_TYPES.MOBILE ? "text-xs ml-[-50px] w-0" : "text-sm"}`}>
           {truncateStr(account.address, 8)} - {account.balance} DOT{" "}
           <a className="cursor-pointer text-accent" onClick={() => disconnect()}>
             Disconnect
