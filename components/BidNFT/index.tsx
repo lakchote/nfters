@@ -1,29 +1,39 @@
 import axios from "axios"
 import { useState } from "react"
 import { v4 as uuidv4 } from "uuid"
+import { useAccount, useConnect } from "wagmi"
+import { MetaMaskConnector } from "@wagmi/core/connectors/metaMask"
 
 export default function BidNFT({ _id, startingPrice }: { _id: string; startingPrice: number }) {
   const [isBidUpdateSuccess, setIsBidUpdateSuccess] = useState<boolean>(false)
   const [isBidUpdateError, setIsBidUpdateError] = useState<boolean>(false)
   const [price, setPrice] = useState<string>("0")
   const [uuid] = useState<string>(uuidv4())
+  const { address } = useAccount()
+  const { connect } = useConnect()
 
-  const handleSubmit = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+  const handleSubmit = async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault()
 
-    const formData = new URLSearchParams({
-      price: price,
-    })
-    axios
-      .post(`${process.env.NEXT_PUBLIC_BACKEND_PICTURES_UPDATE_ENDPOINT}${_id}` ?? "undefined", formData)
-      .then(() => {
-        setIsBidUpdateSuccess(true)
-        setIsBidUpdateError(false)
+    if (!address) {
+      await connect({ connector: new MetaMaskConnector() })
+    } else {
+      const formData = new URLSearchParams({
+        price: price,
+        bidder: address,
       })
-      .catch(() => {
-        setIsBidUpdateError(true)
-        setIsBidUpdateSuccess(false)
-      })
+
+      axios
+        .post(`${process.env.NEXT_PUBLIC_BACKEND_PICTURES_UPDATE_ENDPOINT}${_id}` ?? "undefined", formData)
+        .then(() => {
+          setIsBidUpdateSuccess(true)
+          setIsBidUpdateError(false)
+        })
+        .catch(() => {
+          setIsBidUpdateError(true)
+          setIsBidUpdateSuccess(false)
+        })
+    }
   }
 
   return (

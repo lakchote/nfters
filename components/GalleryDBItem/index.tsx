@@ -1,8 +1,9 @@
 import Image from "next/image"
 import BidNFT from "../BidNFT"
 import { Picture } from "../DiscoverDBMoreNFT/types"
+import truncateStr from "../../utils/truncateStr"
 
-export default function GalleryItem({ _id, title, image, starting_price, ending_date }: Picture) {
+export default function GalleryItem({ _id, title, image, starting_price, ending_date, bidder }: Picture) {
   const handleTimeDiff = (ending_date: string): string => {
     const endingDate = new Date(ending_date)
     const diff = +endingDate - +Date.now()
@@ -13,6 +14,10 @@ export default function GalleryItem({ _id, title, image, starting_price, ending_
     }
 
     return "No time left"
+  }
+
+  const showBidder = () => {
+    if (bidder) return <div className="text-sm ml-5">Last bid by {truncateStr(bidder, 11)}</div>
   }
 
   return (
@@ -29,6 +34,7 @@ export default function GalleryItem({ _id, title, image, starting_price, ending_
         <Image src="/eth_price.png" width={9} height={15} alt="Ethereum logo" className="float-left mr-1" />
         {starting_price} ETH
       </div>
+      {bidder && showBidder()}
       <div className="mt-5 border-t border-t-[#F4F4F4] lg:mx-[24px]"></div>
       <div className="mx-5 flex flex-row mt-4 lg:mt-2 items-center justify-between">
         <div className="btn btn-sm text-primary text-xs normal-case font-dmSansRegular rounded-full border-none bg-discover-category">

@@ -5,4 +5,5 @@ export type Picture = {
   starting_price: number | null
   ending_date: string
   image: string
+  bidder: string | null
 }

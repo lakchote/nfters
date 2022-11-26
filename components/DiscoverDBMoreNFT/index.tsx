@@ -119,6 +119,7 @@ export default function DiscoverDBMoreNFT() {
                     title={picture.title}
                     starting_price={picture.starting_price}
                     image={picture.image}
+                    bidder={picture.bidder}
                   />
                 )
               })}
