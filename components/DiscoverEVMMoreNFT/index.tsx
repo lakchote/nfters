@@ -54,7 +54,6 @@ export default function DiscoverEVMMoreNFT() {
           <button
             className="w-full py-5 mx-0 lg:mx-10 border rounded-full lg:w-[179px] text-xl bg-transparent text-primary border-primary font-dmSansMedium normal-case lg:rounded-[50px]"
             onClick={() => {
-              console.log(data.cursor)
               options.params.cursor = data.cursor
               setOptions(options)
               refetch()

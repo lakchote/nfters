@@ -12,6 +12,8 @@ import { RainbowKitSiweNextAuthProvider } from "@rainbow-me/rainbowkit-siwe-next
 import { SessionProvider } from "next-auth/react"
 import { QueryClient, QueryClientProvider } from "react-query"
 import { useState } from "react"
+import "react-toastify/dist/ReactToastify.css"
+import { ToastContainer } from "react-toastify"
 
 const { chains, provider } = configureChains(
   [chain.goerli],
@@ -44,6 +46,7 @@ export default function App({ Component, pageProps }: AppProps) {
             </RainbowKitProvider>
           </RainbowKitSiweNextAuthProvider>
           <QueryClientProvider client={queryClient}>
+            <ToastContainer />
             <Component {...pageProps} />
           </QueryClientProvider>
         </SessionProvider>
