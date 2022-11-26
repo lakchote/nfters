@@ -1,16 +1,16 @@
-import { useConnectModal } from "@rainbow-me/rainbowkit"
+import { MetaMaskConnector } from "@wagmi/core/connectors/metaMask"
 import Image from "next/image"
 import { useEffect } from "react"
 import { toast } from "react-toastify"
-import { useAccount, useContractWrite, usePrepareContractWrite, useWaitForTransaction } from "wagmi"
+import { useAccount, useConnect, useContractWrite, usePrepareContractWrite, useWaitForTransaction } from "wagmi"
 import addressesJson from "../../constants/addresses.json"
 import facadeAbi from "../../constants/abi.json"
 
 export default function Hero() {
-  const { openConnectModal } = useConnectModal()
+  const { connect } = useConnect()
   const { isDisconnected, address } = useAccount()
   const { config } = usePrepareContractWrite({
-    address: addressesJson[5].address,
+    address: addressesJson[process.env.NEXT_PUBLIC_CHAIN_ID as keyof typeof addressesJson].address,
     abi: facadeAbi,
     functionName: "safeMint",
     args: [address],
@@ -20,8 +20,10 @@ export default function Hero() {
   const { isLoading, isSuccess } = useWaitForTransaction({
     hash: data?.hash,
   })
-  const handleMint = () => {
-    if (isDisconnected) openConnectModal?.()
+  const handleMint = async () => {
+    if (isDisconnected) {
+      await connect({ connector: new MetaMaskConnector() })
+    }
     write?.()
   }
 
