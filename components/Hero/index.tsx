@@ -1,6 +1,38 @@
+import { useConnectModal } from "@rainbow-me/rainbowkit"
 import Image from "next/image"
+import { useEffect } from "react"
+import { toast } from "react-toastify"
+import { useAccount, useContractWrite, usePrepareContractWrite, useWaitForTransaction } from "wagmi"
+import addressesJson from "../../constants/addresses.json"
+import facadeAbi from "../../constants/abi.json"
 
 export default function Hero() {
+  const { openConnectModal } = useConnectModal()
+  const { isDisconnected, address } = useAccount()
+  const { config } = usePrepareContractWrite({
+    address: addressesJson[5].address,
+    abi: facadeAbi,
+    functionName: "safeMint",
+    args: [address],
+    enabled: Boolean(address),
+  })
+  const { write, data, isError, error } = useContractWrite(config)
+  const { isLoading, isSuccess } = useWaitForTransaction({
+    hash: data?.hash,
+  })
+  const handleMint = () => {
+    if (isDisconnected) openConnectModal?.()
+    write?.()
+  }
+
+  useEffect(() => {
+    isSuccess
+      ? toast.success("NFT minted")
+      : isLoading
+      ? toast.info("Minting NFT...")
+      : isError && toast.error(`${"Error : " + error?.message}`)
+  }, [isError, error, isSuccess, isLoading])
+
   return (
     <div className="px-3 lg:pb-[122px] lg:h-[440px] lg:flex justify-between lg:ml-[115px]">
       <div className="relative w-1/2 mx-auto lg:hidden mt-12">
@@ -66,6 +98,9 @@ export default function Hero() {
           Digital marketplace for crypto collectibles and non-fungible tokens (NFTs). Buy, Sell, and discover exclusive
           digital assets.
         </div>
+        <button className="text-accent mt-2 font-avertaRegular cursor-pointer" onClick={handleMint}>
+          Claim FREE NFT
+        </button>
         <div className="relative mt-10">
           <Image src="/dots.png" alt="" width={196} height={154} className="relative right-[53px]" />
           <button className="absolute top-0 btn btn-primary lg:px-10 lg:w-[209px] rounded-[60px] normal-case text-white font-avertaRegular font-extrabold lg:text-xl text-md tracking-[0.06rem] lg:h-[65px]">
