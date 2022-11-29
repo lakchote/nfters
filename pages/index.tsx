@@ -1,6 +1,6 @@
 import Head from "next/head"
 import AmazeNFT from "../components/AmazeNFT"
-import CreateSellNFT from "../components/CreateSellNFT"
+import CreateSellNft from "../components/CreateSellNft"
 import DiscoverDBMoreNFT from "../components/DiscoverDBMoreNFT"
 import FeaturedCollection from "../components/FeaturedCollection"
 import Hero from "../components/Hero"
@@ -19,7 +19,7 @@ export default function Home() {
         <Hero />
         <AmazeNFT />
         <FeaturedCollection />
-        <CreateSellNFT />
+        <CreateSellNft />
         <DiscoverDBMoreNFT />
         <div className="pt-[46px] bg-gray"></div>
         <div className="divider-nft-categories"></div>

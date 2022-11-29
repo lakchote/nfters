@@ -1,6 +1,6 @@
 import Image from "next/image"
 
-export default function CreateSellNFT() {
+export default function CreateSellNft() {
   return (
     <div className="lg:px-[120px] mt-10 mx-4 lg:mx-0 lg:mt-[101px] lg:mb-[142px] lg:flex lg:justify-start lg:space-x-96">
       <div className="lg:flex-col relative">
