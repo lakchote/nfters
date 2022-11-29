@@ -21,7 +21,7 @@ export default function GalleryItem({ _id, title, image, starting_price, ending_
   }
 
   return (
-    <div className="lg:h-[373px] my-auto lg:min-w-[270px] bg-white rounded-md lg:flex flex-col mb-4 pb-4 lg:mb-0 lg:pb-0">
+    <div className="lg:h-[385px] my-auto lg:min-w-[270px] bg-white rounded-md lg:flex flex-col mb-4 pb-4 lg:mb-0 lg:pb-0">
       <Image
         src={`${process.env.NEXT_PUBLIC_BACKEND_ENDPOINT}${image}`}
         alt="NFT Image"
