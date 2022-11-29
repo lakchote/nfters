@@ -4,17 +4,7 @@ const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
   images: {
-    remotePatterns: [
-      {
-        protocol: process.env.NEXT_PUBLIC_BACKEND_PROTOCOL,
-        hostname: process.env.NEXT_PUBLIC_BACKEND_HOSTNAME,
-        port: process.env.NEXT_PUBLIC_BACKEND_PORT,
-      },
-      {
-        protocol: "https",
-        hostname: "www.larvalabs.com",
-      },
-    ],
+    domains: [process.env.NEXT_PUBLIC_BACKEND_HOSTNAME, "www.larvalabs.com"],
   },
 }
 
