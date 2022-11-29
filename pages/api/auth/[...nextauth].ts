@@ -5,7 +5,6 @@ import { getCsrfToken } from "next-auth/react"
 import { SiweMessage } from "siwe"
 
 export default async function auth(req: NextApiRequest, res: NextApiResponse) {
-  const fallbackUrl = "https://nextAuthUrlEnvVarIsNotSet.com"
   const providers = [
     CredentialsProvider({
       name: "Ethereum",
@@ -24,11 +23,11 @@ export default async function auth(req: NextApiRequest, res: NextApiResponse) {
       async authorize(credentials) {
         try {
           const siwe = new SiweMessage(JSON.parse(credentials?.message || "{}"))
-          const nextAuthUrl = new URL(process.env.NEXTAUTH_URL ?? fallbackUrl)
+          const nextAuthUrl = process.env.NEXTAUTH_URL ? new URL(process.env.NEXTAUTH_URL) : false
 
           const result = await siwe.verify({
             signature: credentials?.signature || "",
-            domain: nextAuthUrl.host,
+            domain: nextAuthUrl ? nextAuthUrl?.host : "",
             nonce: await getCsrfToken({ req }),
           })
 
