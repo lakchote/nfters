@@ -9,6 +9,7 @@ export default function UploadImage({ device }: DeviceProps) {
   const [price, setStartingPrice] = useState<string>("0")
   const [endingDate, setEndingDate] = useState("")
   const [image, setImage] = useState<Blob | string>("")
+  const [isUploading, setIsUploading] = useState<boolean>(false)
   const [isUploadSuccess, setIsUploadSuccess] = useState<boolean>(false)
   const [isUploadError, setIsUploadError] = useState<boolean>(false)
 
@@ -21,15 +22,18 @@ export default function UploadImage({ device }: DeviceProps) {
     formData.append("endingDate", endingDate)
     formData.append("category", uploadCategories[parseInt(category)])
 
+    setIsUploading(true)
     axios
       .post(process.env.NEXT_PUBLIC_BACKEND_UPLOAD_ENDPOINT ?? "undefined", formData)
       .then(() => {
         setIsUploadSuccess(true)
         setIsUploadError(false)
+        setIsUploading(false)
       })
       .catch(() => {
         setIsUploadError(true)
         setIsUploadSuccess(false)
+        setIsUploading(false)
       })
   }
 
@@ -118,7 +122,7 @@ export default function UploadImage({ device }: DeviceProps) {
                 ))}
               </select>
               <button className="btn btn-accent text-white" onClick={(e) => handleSubmit(e)} type="submit">
-                Upload
+                {isUploading ? "Uploading..." : "Upload"}
               </button>
             </form>
           )}
